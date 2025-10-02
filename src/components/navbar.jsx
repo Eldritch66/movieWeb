@@ -31,7 +31,7 @@ export default function Navbar({ setQuery }) {
       <Nav>
         <LeftSection>
           <Hamburger
-            style={{ marginLeft: "2rem" }}
+            style={{ marginLeft: "2rem", color: "white !important" }}
             toggled={isOpen}
             toggle={setOpen}
             color="white"

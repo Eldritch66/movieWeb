@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/navbar";
 import MainContent from "./components/content";
-import { AnimatedBackground } from "animated-backgrounds";
-import Saved from "./components/SavedContent";
+// import Saved from "./components/SavedContent";
 
 const KEY = import.meta.env.VITE_API_KEY;
 
@@ -48,7 +47,6 @@ function App() {
         isClicked={isClicked}
         setIsClicked={setIsClicked}
       />
-      <AnimatedBackground animationName="starryNight" />
       <MainContent
         saveListContent={setSaveContent}
         movies={movies}
