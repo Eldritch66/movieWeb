@@ -10,7 +10,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("Harry Potter");
-  // const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     async function fetchMovies() {
