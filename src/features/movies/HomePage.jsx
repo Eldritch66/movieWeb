@@ -25,10 +25,13 @@ export default function HomePage() {
     </div>
   );
 }
-import { getMovies } from "../services/apiMovies";
+import { getMovies } from "../../services/apiMovies";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
+  console.log(url);
+  console.log("Cek params: ", url.searchParams.get("q"));
+
   const query = url.searchParams.get("q") || "batman"; // default search
   return getMovies({ query });
 }

@@ -1,18 +1,24 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Error from "./ui/Error";
-import Header from "./ui/Header";
-import HomePage, { loader as movieLoader } from "./pages/HomePage";
+import AppLayout from "./ui/Layout";
+import HomePage, { loader as movieLoader } from "./features/movies/HomePage";
+import DetailPage from "./features/movies/DetailMovie";
 // import Saved from "./components/SavedContent";
 
 const router = createBrowserRouter([
   {
-    element: <Header />,
+    element: <AppLayout />,
     errorElement: <Error />,
     children: [
       {
         path: "/",
         element: <HomePage />,
         loader: movieLoader,
+      },
+      {
+        path: "/movies/:id",
+        element: <DetailPage />,
+        // loader: movieDetailLoader,
       },
     ],
   },
