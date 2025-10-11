@@ -3,9 +3,9 @@ import Header from "./Header";
 
 function AppLayout() {
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-[#1E1F2B]">
       {/* wrapper sidebar */}
-      <div className="w-48 shrink-0">
+      <div className="w-30 shrink-0 z-50">
         <Header />
       </div>
 
