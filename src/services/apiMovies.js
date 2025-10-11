@@ -7,7 +7,18 @@ export async function getMovies({ query }) {
   const data = await res.json();
 
   if (data.Response === "False") {
-    return []; // balikin array kosong
+    return [];
   }
   return data.Search || [];
+}
+
+export async function detailMovie(id) {
+  const res = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=${KEY}`);
+  if (!res.ok) throw Error("failed to fetch");
+  const data = await res.json();
+  if (data.Response === "False") {
+    return [];
+  }
+
+  return data;
 }

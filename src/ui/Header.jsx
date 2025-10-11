@@ -1,4 +1,7 @@
-import logo1 from "../assets/logo1.png";
+import logo1 from "../assets/movies-green.png";
+import { RiMovie2Line } from "react-icons/ri";
+import { Link } from "react-router";
+
 import { RiMovie2Fill } from "react-icons/ri";
 import { RxBookmark } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
@@ -20,12 +23,14 @@ export default function Header() {
       </div>
       <ul className="w-full flex flex-col gap-40 mt-8  text-white">
         <li className="pl-6">
-          <RiMovie2Fill
-            className={`inline-block ${
-              navOpen ? "text-2xl" : "text-4xl"
-            } text-white`}
-          />
-          {navOpen ? <span className="pl-2 inline-block">Browse</span> : ""}
+          <Link to="/">
+            <RiMovie2Line
+              className={`inline-block ${
+                navOpen ? "text-2xl" : "text-4xl"
+              } text-white cursor-pointer`}
+            />
+            {navOpen && <span className="pl-2 inline-block">Browse</span>}
+          </Link>
         </li>
         <li className="pl-6">
           <RxBookmark
@@ -45,12 +50,12 @@ export default function Header() {
         {navOpen ? (
           <TfiArrowCircleLeft
             onClick={() => setNavOpen(!navOpen)}
-            className="text-3xl"
+            className="text-3xl text-green-400"
           />
         ) : (
           <TfiArrowCircleRight
             onClick={() => setNavOpen(!navOpen)}
-            className="text-3xl"
+            className="text-3xl text-green-400"
           />
         )}
       </div>

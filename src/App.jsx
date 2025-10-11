@@ -2,7 +2,9 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import Error from "./ui/Error";
 import AppLayout from "./ui/Layout";
 import HomePage, { loader as movieLoader } from "./features/movies/HomePage";
-import DetailPage from "./features/movies/DetailMovie";
+import DetailPage, {
+  loader as detailLoader,
+} from "./features/movies/DetailMovie";
 // import Saved from "./components/SavedContent";
 
 const router = createBrowserRouter([
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
       {
         path: "/movies/:id",
         element: <DetailPage />,
-        // loader: movieDetailLoader,
+        loader: detailLoader,
       },
     ],
   },
