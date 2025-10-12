@@ -6,12 +6,19 @@ import { RiMovie2Fill } from "react-icons/ri";
 import { RxBookmark } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { clearSearch } from "../features/movies/moviesSlice";
+
 import { TfiArrowCircleRight } from "react-icons/tfi";
 import { TfiArrowCircleLeft } from "react-icons/tfi";
 
 export default function Header() {
   const [navOpen, setNavOpen] = useState(false);
+  const dispatch = useDispatch();
 
+  const handleClearParams = () => {
+    dispatch(clearSearch());
+  };
   return (
     <nav
       className={`${
@@ -23,7 +30,7 @@ export default function Header() {
       </div>
       <ul className="w-full flex flex-col gap-40 mt-8  text-white">
         <li className="pl-6">
-          <Link to="/">
+          <Link to="/" onClick={handleClearParams}>
             <RiMovie2Line
               className={`inline-block ${
                 navOpen ? "text-2xl" : "text-4xl"

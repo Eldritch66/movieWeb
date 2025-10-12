@@ -1,44 +1,41 @@
-import {
-  useLoaderData,
-  useNavigation,
-  useNavigate,
-  useLocation,
-  Link,
-} from "react-router";
+import { useLoaderData, useNavigation, useNavigate, Link } from "react-router";
 import { CiSearch } from "react-icons/ci";
 import { FaRegBookmark, FaPlay } from "react-icons/fa";
 import Loading from "../../ui/Loading";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getMovies } from "../../services/apiMovies";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearch } from "./moviesSlice";
+import { headerPoster } from "./dataPosterHeader";
+
+const firstImg = headerPoster[0].img;
+const firstId = headerPoster[0].imdbID;
 
 export default function HomePage() {
   const movies = useLoaderData();
   const navigation = useNavigation();
-  const isLoading = navigation.state === "loading";
-
   const navigate = useNavigate();
-  const location = useLocation();
+  const dispatch = useDispatch();
+  const queryInput = useSelector((state) => state.movies.query);
+
+  const isLoading = navigation.state === "loading";
+  // const location = useLocation();
 
   // Ambil query dari URL saat pertama kali render
-  const [search, setSearch] = useState(() => {
-    const params = new URLSearchParams(location.search);
-    return params.get("q") || "";
-  });
+  // const [search, setSearch] = useState(() => {
+  //   const params = new URLSearchParams(location.search);
+  //   return params.get("q") || "";
+  // });
 
-  // Debounce effect: hanya update URL setelah user berhenti mengetik
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const params = new URLSearchParams(location.search);
-      if (search) {
-        params.set("q", search);
-      } else {
-        params.delete("q");
-      }
+      const params = new URLSearchParams();
+      if (queryInput) params.set("q", queryInput);
       navigate(`?${params.toString()}`, { replace: true });
     }, 500);
 
     return () => clearTimeout(timeout);
-  }, [search, navigate, location.search]);
+  }, [queryInput, navigate]);
   return (
     <>
       <section
@@ -50,7 +47,7 @@ export default function HomePage() {
           <input
             type="text"
             placeholder="Search..."
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => dispatch(setSearch(e.target.value))}
             className="w-48 bg-[#2B2B36] text-white font-mono rounded-full py-1.5 pl-9 pr-3 transition-all duration-300 placeholder:text-stone-400 outline-none focus:outline-none focus:ring focus:ring-green-500 focus:ring-opacity-50 md:w-96 md:focus:w-[600px]"
           />
         </div>
@@ -61,7 +58,7 @@ export default function HomePage() {
         className="relative max-w-[1040px] h-80 ml-20 mt-8"
       >
         <img
-          src="/images/chainsawman.jpg"
+          src={firstImg}
           alt="Banner"
           className="w-full h-full object-cover"
         />
@@ -81,7 +78,7 @@ export default function HomePage() {
             2025 ‧ Horror/Adventure ‧ 1h 40m
           </p>
           <span className="bg-green-600 rounded-xl mt-2 w-48 p-1.5 font-mono text-xl text-center cursor-pointer">
-            Watch now
+            <Link to={`/movies/${firstId}`}>Detail</Link>
           </span>
         </div>
       </div>
@@ -89,11 +86,11 @@ export default function HomePage() {
 
       <main className="ml-20 mt-8 max-w-[1040px]">
         <span className="text-white text-xl font-bold ml-1">
-          {search.length === 0 ? "Evangelion" : search}
+          {queryInput.length === 0 ? "Evangelion" : queryInput}
         </span>
         <section className="flex flex-row mt-5 flex-wrap">
-          {movies?.map((m) => (
-            <ShowMovies movies={m} key={m.imdbID} />
+          {movies?.map((m, i) => (
+            <ShowMovies movies={m} key={i} />
           ))}
         </section>
       </main>
@@ -118,7 +115,7 @@ function ShowMovies({ movies }) {
         <span
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
         bg-green-600 text-white font-mono text-base px-4 py-4 rounded-full
-        opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer hover:bg-green-700"
+        opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer hover:bg-green-700 "
         >
           <FaPlay className="" />
         </span>
@@ -136,6 +133,6 @@ export async function loader({ request }) {
   console.log(url);
   console.log("Cek params: ", url.searchParams.get("q"));
 
-  const query = url.searchParams.get("q") || "evangelion"; // default search
+  const query = url.searchParams.get("q") || "evangelion";
   return getMovies({ query });
 }
