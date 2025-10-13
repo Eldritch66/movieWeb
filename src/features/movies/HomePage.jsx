@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigation, useNavigate, Link } from "react-router";
 import { CiSearch } from "react-icons/ci";
-import { FaRegBookmark, FaPlay } from "react-icons/fa";
+import { FaRegBookmark, FaPlay, FaCircle } from "react-icons/fa";
 import Loading from "../../ui/Loading";
 import { useEffect } from "react";
 import { getMovies } from "../../services/apiMovies";
@@ -45,6 +45,8 @@ export default function HomePage() {
         <div className="relative">
           <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-100 text-xl" />
           <input
+            id="searchBar"
+            name="search"
             type="text"
             placeholder="Search..."
             onChange={(e) => dispatch(setSearch(e.target.value))}
@@ -62,6 +64,7 @@ export default function HomePage() {
           alt="Banner"
           className="w-full h-full object-cover"
         />
+
         <div className="absolute top-0 left-10 z-10">
           <div className="bg-green-600 h-10 rounded-bl-xl rounded-br-xl w-8">
             <FaRegBookmark className="cursor-pointer text-3xl m-auto pt-2 text-white z-20" />
@@ -81,19 +84,26 @@ export default function HomePage() {
             <Link to={`/movies/${firstId}`}>Detail</Link>
           </span>
         </div>
+        <div className="text-white absolute left-1/2 -translate-x-1/2 flex flex-row mt-4 gap-5">
+          <FaCircle className="text-[10px] text-[#2B2B36] font-extralight cursor-pointer" />
+          <FaCircle className="text-[10px] text-green-600 font-extralight cursor-pointer" />
+          <FaCircle className="text-[10px] text-[#2B2B36] font-extralight cursor-pointer" />
+        </div>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <main className="mt-8 max-w-[1040px]">
+            <span className="text-white text-xl font-bold ml-1">
+              {queryInput.length === 0 ? "Evangelion" : queryInput}
+            </span>
+            <section className="flex flex-row mt-5 flex-wrap">
+              {movies?.map((m, i) => (
+                <ShowMovies movies={m} key={i} />
+              ))}
+            </section>
+          </main>
+        )}
       </div>
-      {isLoading && <Loading />}
-
-      <main className="ml-20 mt-8 max-w-[1040px]">
-        <span className="text-white text-xl font-bold ml-1">
-          {queryInput.length === 0 ? "Evangelion" : queryInput}
-        </span>
-        <section className="flex flex-row mt-5 flex-wrap">
-          {movies?.map((m, i) => (
-            <ShowMovies movies={m} key={i} />
-          ))}
-        </section>
-      </main>
     </>
   );
 }
@@ -114,10 +124,10 @@ function ShowMovies({ movies }) {
       <Link to={`/movies/${movies.imdbID}`}>
         <span
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-        bg-green-600 text-white font-mono text-base px-4 py-4 rounded-full
-        opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer hover:bg-green-700 "
+        bg-black/40 text-white font-mono text-base px-4 py-4 rounded-full
+        opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer hover:bg-black/30 "
         >
-          <FaPlay className="" />
+          <FaPlay className="text-green-400" />
         </span>
       </Link>
 
@@ -130,8 +140,7 @@ function ShowMovies({ movies }) {
 
 export async function loader({ request }) {
   const url = new URL(request.url);
-  console.log(url);
-  console.log("Cek params: ", url.searchParams.get("q"));
+  // console.log("Cek params: ", url.searchParams.get("q"));
 
   const query = url.searchParams.get("q") || "evangelion";
   return getMovies({ query });

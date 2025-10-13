@@ -1,8 +1,10 @@
 import { detailMovie } from "../../services/apiMovies";
 import { useLoaderData, useNavigate, useNavigation } from "react-router";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { FiPlus } from "react-icons/fi";
 import { IoReturnUpBack } from "react-icons/io5";
+import { saveMovie } from "./moviesSlice";
 
 //{bookInfo.title.length > 20
 // ? bookInfo.title.slice(0, 20) + "..."
@@ -12,6 +14,7 @@ export default function DetailPage() {
   const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const movie = useLoaderData();
   const isLoading = navigation.state === "loading";
@@ -20,7 +23,6 @@ export default function DetailPage() {
 
   const genreString = movie.Genre;
   const genres = genreString.split(", ").map((g) => g.trim());
-  console.log(genres);
 
   return (
     <main className="ml-20 mt-4">
@@ -107,7 +109,12 @@ export default function DetailPage() {
             </ul>
           </section>
           <div className="mt-6 w-60">
-            <button className="border-2 border-white flex items-center justify-center gap-2 px-8 py-2 rounded-2xl font-base text-[22px] cursor-pointer">
+            <button
+              className="border-2 border-white flex items-center justify-center gap-2 px-8 py-2 rounded-2xl font-base text-[22px] cursor-pointer"
+              onClick={() => {
+                dispatch(saveMovie(movie));
+              }}
+            >
               <FiPlus className="text-[26px]" />
               Watchlist
             </button>

@@ -1,6 +1,9 @@
 .container {
   margin-top: 5rem;
   margin-bottom: 5rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .loader {

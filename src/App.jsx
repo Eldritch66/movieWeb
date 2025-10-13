@@ -5,6 +5,7 @@ import HomePage, { loader as movieLoader } from "./features/movies/HomePage";
 import DetailPage, {
   loader as detailLoader,
 } from "./features/movies/DetailMovie";
+import SaveMovies from "./features/saved/SaveMovies";
 // import Saved from "./components/SavedContent";
 
 const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         path: "/movies/:id",
         element: <DetailPage />,
         loader: detailLoader,
+      },
+      {
+        path: "/saveMovies/",
+        element: <SaveMovies />,
       },
     ],
   },

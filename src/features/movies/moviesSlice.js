@@ -10,7 +10,17 @@ const movieSlice = createSlice({
   initialState,
   reducers: {
     saveMovie(state, action) {
-      state.movieSave = action.payload;
+      const isExist = state.movieSave.some(
+        (m) => m.imdbID === action.payload.imdbID
+      );
+      if (!isExist) {
+        state.movieSave.push(action.payload);
+      }
+    },
+    deleteMovie(state, action) {
+      state.movieSave = state.movieSave.filter(
+        (m) => m.imdbID !== action.payload
+      );
     },
     setSearch: (state, action) => {
       state.query = action.payload;
@@ -21,6 +31,9 @@ const movieSlice = createSlice({
   },
 });
 
-export const { saveMovie, setSearch, clearSearch } = movieSlice.actions;
+export const { saveMovie, setSearch, clearSearch, deleteMovie } =
+  movieSlice.actions;
 
 export default movieSlice.reducer;
+
+export const getSaveMovies = (state) => state.movies.movieSave;

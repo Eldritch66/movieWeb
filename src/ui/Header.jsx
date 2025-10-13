@@ -40,10 +40,16 @@ export default function Header() {
           </Link>
         </li>
         <li className="pl-6">
-          <RxBookmark
-            className={`inline-block ${navOpen ? "text-2xl" : "text-4xl"}`}
-          />
-          {navOpen ? <span className="pl-2 inline-block">Watch List</span> : ""}
+          <Link to="/saveMovies/">
+            <RxBookmark
+              className={`inline-block ${navOpen ? "text-2xl" : "text-4xl"}`}
+            />
+            {navOpen ? (
+              <span className="pl-2 inline-block">Watch List</span>
+            ) : (
+              ""
+            )}
+          </Link>
         </li>
         <li className="pl-6">
           <CgProfile
