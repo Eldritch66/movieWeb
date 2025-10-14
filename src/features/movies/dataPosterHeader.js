@@ -2,7 +2,7 @@ export const headerPoster = [
   {
     id: "chainsawman",
     Title: "Chainsaw Man – The Movie: \n Reze Arc",
-    img: "/images/chainsawman.jpg",
+    img: "images/chainsawman.jpg",
     imdbID: "tt30472557",
   },
   {

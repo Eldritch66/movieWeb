@@ -1,10 +1,11 @@
 import { detailMovie } from "../../services/apiMovies";
 import { useLoaderData, useNavigate, useNavigation } from "react-router";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FiPlus } from "react-icons/fi";
 import { IoReturnUpBack } from "react-icons/io5";
-import { saveMovie } from "./moviesSlice";
+import { FaCheck } from "react-icons/fa6";
+import { toggleWatchlist } from "./moviesSlice";
 
 //{bookInfo.title.length > 20
 // ? bookInfo.title.slice(0, 20) + "..."
@@ -15,12 +16,13 @@ export default function DetailPage() {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
   const movie = useLoaderData();
+
+  const movieSave = useSelector((state) => state.movies.movieSave);
+  //is this film already save?
+  const isSaved = movieSave.some((m) => m.imdbID === movie.imdbID);
+  // console.log(movie);
   const isLoading = navigation.state === "loading";
-
-  console.log(movie);
-
   const genreString = movie.Genre;
   const genres = genreString.split(", ").map((g) => g.trim());
 
@@ -110,13 +112,24 @@ export default function DetailPage() {
           </section>
           <div className="mt-6 w-60">
             <button
-              className="border-2 border-white flex items-center justify-center gap-2 px-8 py-2 rounded-2xl font-base text-[22px] cursor-pointer"
-              onClick={() => {
-                dispatch(saveMovie(movie));
-              }}
+              className={`border-2 flex items-center justify-center gap-2 px-8 py-2 rounded-2xl font-base text-[22px] cursor-pointer transition-colors ${
+                isSaved
+                  ? "border-green-400 text-green-400 hover:bg-green-400 hover:text-black"
+                  : "border-white text-white hover:bg-white hover:text-black"
+              }`}
+              onClick={() => dispatch(toggleWatchlist(movie))}
             >
-              <FiPlus className="text-[26px]" />
-              Watchlist
+              {isSaved ? (
+                <>
+                  <FaCheck className="text-[26px]" />
+                  <span>Added</span>
+                </>
+              ) : (
+                <>
+                  <FiPlus className="text-[26px]" />
+                  <span>Watchlist</span>
+                </>
+              )}
             </button>
           </div>
         </header>
