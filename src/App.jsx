@@ -6,30 +6,34 @@ import DetailPage, {
   loader as detailLoader,
 } from "./features/movies/DetailMovie";
 import SaveMovies from "./features/saved/SaveMovies";
-// import Saved from "./components/SavedContent";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      element: <AppLayout />,
+      errorElement: <Error />,
+      children: [
+        {
+          path: "/",
+          element: <HomePage />,
+          loader: movieLoader,
+        },
+        {
+          path: "/movies/:id",
+          element: <DetailPage />,
+          loader: detailLoader,
+        },
+        {
+          path: "/saveMovies/",
+          element: <SaveMovies />,
+        },
+      ],
+    },
+  ],
   {
-    element: <AppLayout />,
-    errorElement: <Error />,
-    children: [
-      {
-        path: "/",
-        element: <HomePage />,
-        loader: movieLoader,
-      },
-      {
-        path: "/movies/:id",
-        element: <DetailPage />,
-        loader: detailLoader,
-      },
-      {
-        path: "/saveMovies/",
-        element: <SaveMovies />,
-      },
-    ],
-  },
-]);
+    basename: "/movieWeb",
+  }
+);
 
 function App() {
   return (
