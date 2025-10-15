@@ -40,7 +40,7 @@ export default function HomePage() {
     <>
       <section
         id="inputSearch"
-        className="max-w-[1040px]  mt-8 ml-20 flex justify-center"
+        className="max-w-[1100px]  mt-8 ml-20 flex justify-center"
       >
         <div className="relative">
           <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-100 text-xl" />
@@ -55,10 +55,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div
-        id="title-banner"
-        className="relative max-w-[1040px] h-80 ml-20 mt-8"
-      >
+      <div id="title-banner" className="relative w-[1100px] h-80 ml-20 mt-8">
         <img
           src={firstImg}
           alt="Banner"
@@ -92,7 +89,7 @@ export default function HomePage() {
         {isLoading ? (
           <Loading />
         ) : (
-          <main className="mt-8 max-w-[1040px]">
+          <main className="mt-8 pl-6">
             <span className="text-white text-xl font-bold ml-1">
               {queryInput.length === 0 ? "Evangelion" : queryInput}
             </span>
@@ -111,14 +108,12 @@ export default function HomePage() {
 function ShowMovies({ movies }) {
   return (
     <div className="w-48 h-78 relative m-2 group overflow-hidden rounded-lg cursor-pointer">
-      {/* Gambar utama */}
       <img
         className="w-48 h-78 object-cover transition-all duration-300 group-hover:scale-110"
         src={movies.Poster}
         alt={movies.Title}
       />
 
-      {/* Overlay gelap muncul saat hover */}
       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       <Link to={`/movies/${movies.imdbID}`}>
