@@ -105,13 +105,15 @@ export default function DetailPage() {
               </li>
             </ul>
           </section>
-          <ToggleWatchlistButton
-            movie={movie}
-            px="6"
-            mt="6"
-            text="text-xl"
-            width="60"
-          />
+          <div className="mt-4">
+            <ToggleWatchlistButton
+              movie={movie}
+              px="6"
+              mt="6"
+              text="text-xl"
+              width="40"
+            />
+          </div>
         </header>
       </article>
     </main>
