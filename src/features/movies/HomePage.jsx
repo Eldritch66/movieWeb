@@ -40,7 +40,7 @@ export default function HomePage() {
     <>
       <section
         id="inputSearch"
-        className="max-w-[1100px]  mt-8 ml-20 flex justify-center"
+        className="w-full max-w-[1200px] sm:mx-auto mt-8 flex justify-center px-4 sm:px-8"
       >
         <div className="relative">
           <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-100 text-xl" />
@@ -55,7 +55,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div id="title-banner" className="relative w-[1100px] h-80 ml-20 mt-8">
+      <div
+        id="title-banner"
+        className="relative w-full max-w-[1200px] h-48 sm:h-64 md:h-80 mx-auto mt-8 "
+      >
         <img
           src={firstImg}
           alt="Banner"
@@ -68,7 +71,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="absolute inset-0 bg-black/30 rounded-lg " />
+        <div className="absolute inset-0 bg-black/30  " />
 
         <div className="absolute left-10 bottom-10 flex flex-col text-white">
           <h2 className="text-xl font-bold mb-1">
@@ -89,11 +92,11 @@ export default function HomePage() {
         {isLoading ? (
           <Loading />
         ) : (
-          <main className="mt-8 pl-6">
+          <main className="mt-8">
             <span className="text-white text-xl font-bold ml-1">
               {queryInput.length === 0 ? "Evangelion" : queryInput}
             </span>
-            <section className="flex flex-row mt-5 flex-wrap">
+            <section className="flex flex-row flex-wrap justify-center gap-6 mt-5">
               {movies?.map((m, i) => (
                 <ShowMovies movies={m} key={i} />
               ))}
@@ -107,7 +110,7 @@ export default function HomePage() {
 
 function ShowMovies({ movies }) {
   return (
-    <div className="w-48 h-78 relative m-2 group overflow-hidden rounded-lg cursor-pointer">
+    <div className="w-48 h-78 relative  group overflow-hidden rounded-lg cursor-pointer">
       <img
         className="w-48 h-78 object-cover transition-all duration-300 group-hover:scale-110"
         src={movies.Poster}

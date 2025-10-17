@@ -3,15 +3,15 @@ import { FaCheck } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleWatchlist } from "../features/movies/moviesSlice";
 
-export default function ToggleWatchlistButton({ movie, px, text, mt, width }) {
+export default function ToggleWatchlistButton({ movie }) {
   const dispatch = useDispatch();
   const movieSave = useSelector((state) => state.movies.movieSave);
   const isSaved = movieSave.some((m) => m.imdbID === movie.imdbID);
 
   return (
-    <div className={`mt-${mt} w-full`}>
+    <div className="w-full">
       <button
-        className={`border-2 flex w-${width} items-center justify-center gap-2 px-${px} py-2 rounded-xl font-base cursor-pointer transition-colors  ${
+        className={`border-2 flex w-40 items-center justify-center gap-2 px-8 py-2 rounded-xl font-base cursor-pointer transition-colors  ${
           isSaved
             ? "border-white text-white hover:bg-white hover:text-black"
             : "border-white text-white hover:bg-white hover:text-black"
@@ -20,12 +20,12 @@ export default function ToggleWatchlistButton({ movie, px, text, mt, width }) {
       >
         {isSaved ? (
           <>
-            <FaCheck className={text} />
+            <FaCheck className="text-xl" />
             <span>Added</span>
           </>
         ) : (
           <>
-            <FiPlus className={text} />
+            <FiPlus className="text-xl" />
             <span>Watchlist</span>
           </>
         )}

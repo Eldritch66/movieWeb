@@ -3,14 +3,12 @@ import Header from "./Header";
 
 function AppLayout() {
   return (
-    <div className="flex min-h-screen">
-      {/* wrapper sidebar */}
-      <div className="w-30 shrink-0 z-50">
+    <div className="flex min-h-screen overflow-x-hidden">
+      <aside className="w-[40px] shrink-0 z-50">
         <Header />
-      </div>
+      </aside>
 
-      {/* konten utama */}
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-hidden">
         <Outlet />
       </main>
     </div>

@@ -22,7 +22,7 @@ export default function DetailPage() {
   const genres = genreString.split(", ").map((g) => g.trim());
 
   return (
-    <main className="ml-20 mt-4">
+    <main className="ml-10 sm:ml-40 mt-4">
       <article className="text-white flex flex-row">
         <div className="flex flex-col">
           {!isLoading && (
@@ -106,13 +106,7 @@ export default function DetailPage() {
             </ul>
           </section>
           <div className="mt-4">
-            <ToggleWatchlistButton
-              movie={movie}
-              px="6"
-              mt="6"
-              text="text-xl"
-              width="40"
-            />
+            <ToggleWatchlistButton movie={movie} px="20" width="40" />
           </div>
         </header>
       </article>

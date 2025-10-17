@@ -21,14 +21,18 @@ export default function Header() {
   };
   return (
     <nav
-      className={`${
-        navOpen ? "w-44" : "w-28"
-      } h-dvh bg-[#1E1F2B] fixed text-white border-r-1 border-r-gray-600`}
+      className={`fixed inset-y-0 left-0 bg-[#1E1F2B] text-white border-r border-gray-700
+    transition-transform duration-300 ease-in-out
+    ${
+      navOpen
+        ? "translate-x-0 w-44"
+        : "-translate-x-[90%] md:-translate-x-[0%] w-25"
+    } `}
     >
       <div className={`${navOpen ? "w-32" : "W-20"} mx-auto`}>
         <img className="box-border object-contain" src={logo1} alt="" />
       </div>
-      <ul className="w-full flex flex-col gap-40 mt-8  text-white">
+      <ul className="max-w-full min-w-10 flex flex-col gap-40 mt-8  text-white">
         <li className="pl-6">
           <Link to="/" onClick={handleClearParams}>
             <RiMovie2Line
@@ -45,7 +49,7 @@ export default function Header() {
               className={`inline-block ${navOpen ? "text-2xl" : "text-4xl"}`}
             />
             {navOpen ? (
-              <span className="pl-2 inline-block">Watch List</span>
+              <span className="pl-2 inline-block">Watchlist</span>
             ) : (
               ""
             )}
