@@ -10,7 +10,7 @@ export default function SavePages() {
   console.log(movieSave);
   const dispatch = useDispatch();
   return (
-    <section className="min-w-[300px] max-w-[1100px] h-auto mt-8 ml-2 sm:ml-36">
+    <section className="min-w-[300px] max-w-[1100px] h-auto mt-8 ml-2 mr-2  sm:ml-20 xl:ml-44">
       <div className="w-full h-10 relative">
         <h1 className="uppercase text-xl sm:text-4xl text-white font-mono ">
           Watchlist
@@ -47,22 +47,22 @@ function WatchList({ movieList, dispatch }) {
         <h2 className="text-sm text-white font-sans ml-2 font-semibold mt-4 px-2 mr-2">
           {movieList.Title}
         </h2>
-        <p className="ml-2 text-sm mt-0 sm:mt-2 px-2 text-gray-300">
+        <p className="ml-2 text-xs mt-0 sm:mt-2 px-2 text-gray-300">
           Directed by {movieList.Director}
         </p>
         <ul className="ml-2 mt-2 text-gray-400">
           <li className="px-2  flex flex-row items-center">
             <TfiTime className="text-sm" />
-            <span className="text-sm px-2">{movieList.Runtime}</span>
+            <span className="text-xs px-2">{movieList.Runtime}</span>
           </li>
           <li className="px-2  flex flex-row mt-1 items-center">
             <PiSpeakerSimpleHighLight className="text-sm" />
-            <span className="text-sm px-2">{movieList.Country}</span>
+            <span className="text-xs px-2">{movieList.Country}</span>
           </li>
           <li className="flex flex-row mt-1 ml-2 items-center overflow-hidden">
             <PiSubtitles className="text-sm" />
-            <span className="text-sm px-2">
-              <span className="text-sm px-2">
+            <span className="px-2">
+              <span className="text-xs px-2">
                 {movieList.Language
                   ? movieList.Language.length > 20
                     ? movieList.Language.slice(0, 20) + "..."

@@ -63,7 +63,7 @@ export default function DetailPage() {
             </div>
           </div>
           <section className="max-w-[700px] mx-auto">
-            <p className="text-white text-justify leading-relaxed break-words whitespace-normal text-base">
+            <p className="text-white text-justify leading-relaxed font-sans break-words whitespace-normal text-base">
               {expanded || movie.Plot.length <= 300 ? (
                 movie.Plot
               ) : (

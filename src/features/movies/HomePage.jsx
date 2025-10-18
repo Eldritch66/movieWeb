@@ -57,33 +57,35 @@ export default function HomePage() {
 
       <div
         id="title-banner"
-        className="relative w-full max-w-[1200px] h-48 sm:h-64 md:h-80 mx-auto mt-8 "
+        className="relative w-full max-w-[1200px] h-auto ml-0 sm:h-64 md:h-80 mt-8 md:ml-24 xl:ml-40"
       >
-        <img
-          src={firstImg}
-          alt="Banner"
-          className="w-full h-full object-cover"
-        />
+        <header className="w-[95%] relative h-full mx-auto rounded-lg overflow-hidden">
+          <img
+            src={firstImg}
+            alt="Banner"
+            className="w-full h-full object-cover"
+          />
+          <div className="w-full absolute inset-0 bg-black/30  opacity-50" />
 
-        <div className="absolute top-0 left-10 z-10">
-          <div className="bg-green-600 h-10 rounded-bl-xl rounded-br-xl w-8">
-            <FaRegBookmark className="cursor-pointer text-3xl m-auto pt-2 text-white z-20" />
+          <div className="absolute top-0 left-5  sm:left-20 z-10">
+            <div className="bg-green-600 h-8 sm:h-10 rounded-bl-xl rounded-br-xl w-8">
+              <FaRegBookmark className="cursor-pointer text-2xl sm:text-3xl m-auto pt-2 text-white z-20" />
+            </div>
           </div>
-        </div>
 
-        <div className="absolute inset-0 bg-black/30  " />
+          <div className="absolute left-5 bottom-5 sm:left-20 sm:bottom-10 flex flex-col text-white z-40">
+            <h2 className="text-xs sm:text-xl font-bold mb-1">
+              Chainsaw Man – The Movie: <br /> Reze Arc
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-400">
+              2025 ‧ Horror/Adventure ‧ 1h 40m
+            </p>
+            <span className="bg-green-600 rounded-xl mt-2 w-20 text-sm sm:w-48 p-1.5 font-mono sm:text-xl text-center cursor-pointer">
+              <Link to={`/movies/${firstId}`}>Detail</Link>
+            </span>
+          </div>
+        </header>
 
-        <div className="absolute left-10 bottom-10 flex flex-col text-white">
-          <h2 className="text-xl font-bold mb-1">
-            Chainsaw Man – The Movie: <br /> Reze Arc
-          </h2>
-          <p className="text-sm text-gray-400">
-            2025 ‧ Horror/Adventure ‧ 1h 40m
-          </p>
-          <span className="bg-green-600 rounded-xl mt-2 w-48 p-1.5 font-mono text-xl text-center cursor-pointer">
-            <Link to={`/movies/${firstId}`}>Detail</Link>
-          </span>
-        </div>
         <div className="text-white absolute left-1/2 -translate-x-1/2 flex flex-row mt-4 gap-5">
           <FaCircle className="text-[10px] text-[#2B2B36] font-extralight cursor-pointer" />
           <FaCircle className="text-[10px] text-green-600 font-extralight cursor-pointer" />
@@ -110,16 +112,16 @@ export default function HomePage() {
 
 function ShowMovies({ movies }) {
   return (
-    <div className="w-48 h-78 relative  group overflow-hidden rounded-lg cursor-pointer">
-      <img
-        className="w-48 h-78 object-cover transition-all duration-300 group-hover:scale-110"
-        src={movies.Poster}
-        alt={movies.Title}
-      />
-
-      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
+    <div className="w-28 h-32 object-center sm:w-48 sm:h-78 relative  group overflow-hidden rounded-lg cursor-pointer">
       <Link to={`/movies/${movies.imdbID}`}>
+        <img
+          className="w-48 h-78 object-cover transition-all duration-300 group-hover:scale-110"
+          src={movies.Poster}
+          alt={movies.Title}
+        />
+
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
+
         <span
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
         bg-black/40 text-white font-mono text-base px-4 py-4 rounded-full
@@ -127,11 +129,11 @@ function ShowMovies({ movies }) {
         >
           <FaPlay className="text-green-400" />
         </span>
-      </Link>
 
-      <span className="absolute bottom-0 left-0 w-full text-white bg-black/70 text-sm text-center py-1">
-        {movies.Title}
-      </span>
+        <span className="absolute bottom-0 left-0 w-full text-white bg-black/70 text-sm text-center py-1">
+          {movies.Title}
+        </span>
+      </Link>
     </div>
   );
 }
