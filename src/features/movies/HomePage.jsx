@@ -57,7 +57,7 @@ export default function HomePage() {
 
       <div
         id="title-banner"
-        className="relative w-full max-w-[1200px] h-auto ml-0 sm:h-64 md:h-80 mt-8 md:ml-24 xl:ml-40"
+        className="relative w-full max-w-[1200px] h-auto ml-0 sm:h-64 md:h-80 mt-8 md:ml-10 xl:ml-40"
       >
         <header className="w-[95%] relative h-full mx-auto rounded-lg overflow-hidden">
           <img
@@ -112,10 +112,10 @@ export default function HomePage() {
 
 function ShowMovies({ movies }) {
   return (
-    <div className="w-28 h-32 object-center sm:w-48 sm:h-78 relative  group overflow-hidden rounded-lg cursor-pointer">
+    <div className="w-28 h-32 sm:w-48 sm:h-78 relative  group overflow-hidden rounded-lg cursor-pointer">
       <Link to={`/movies/${movies.imdbID}`}>
         <img
-          className="w-48 h-78 object-cover transition-all duration-300 group-hover:scale-110"
+          className="w-48 h-78 object-cover object-center transition-all duration-300 group-hover:scale-110"
           src={movies.Poster}
           alt={movies.Title}
         />
