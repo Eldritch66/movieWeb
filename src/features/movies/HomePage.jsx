@@ -98,7 +98,7 @@ export default function HomePage() {
             <span className="text-white text-xl font-bold ml-1">
               {queryInput.length === 0 ? "Evangelion" : queryInput}
             </span>
-            <section className="flex flex-row flex-wrap justify-center gap-6 mt-5">
+            <section className="flex flex-row flex-wrap justify-center gap-3 sm:gap-6 mt-5">
               {movies?.map((m, i) => (
                 <ShowMovies movies={m} key={i} />
               ))}
@@ -112,10 +112,10 @@ export default function HomePage() {
 
 function ShowMovies({ movies }) {
   return (
-    <div className="w-28 h-32 sm:w-48 sm:h-78 relative  group overflow-hidden rounded-lg cursor-pointer">
+    <div className="w-30 h-40 mt-2 sm:w-48 sm:h-78 relative  group overflow-hidden rounded-lg cursor-pointer">
       <Link to={`/movies/${movies.imdbID}`}>
         <img
-          className="w-48 h-78 object-cover object-center transition-all duration-300 group-hover:scale-110"
+          className="w-full h-[100px] object-contain sm:object-cover sm:h-full object-center transition-all duration-300 group-hover:scale-110"
           src={movies.Poster}
           alt={movies.Title}
         />
@@ -130,9 +130,9 @@ function ShowMovies({ movies }) {
           <FaPlay className="text-green-400" />
         </span>
 
-        <span className="absolute bottom-0 left-0 w-full text-white bg-black/70 text-sm text-center py-1">
+        <h2 className="w-full h-auto overflow-y-hidden text-center sm:absolute sm:bottom-0 sm:left-0 text-white sm:bg-black/70 text-xs sm:text-sm py-1">
           {movies.Title}
-        </span>
+        </h2>
       </Link>
     </div>
   );

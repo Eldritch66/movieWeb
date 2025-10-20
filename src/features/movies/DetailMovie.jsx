@@ -107,9 +107,7 @@ export default function DetailPage() {
               </li>
             </ul>
           </section>
-          <div className="mt-4">
-            <ToggleWatchlistButton movie={movie} />
-          </div>
+          <ToggleWatchlistButton movie={movie} />
         </header>
       </article>
     </main>

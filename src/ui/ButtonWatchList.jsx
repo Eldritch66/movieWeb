@@ -11,7 +11,7 @@ export default function ToggleWatchlistButton({ movie }) {
   return (
     <div className="w-full">
       <button
-        className={`border-2 flex w-40 items-center justify-center gap-2 px-8 py-2 rounded-xl font-base cursor-pointer transition-colors  ${
+        className={`border-2 flex w-28 my-2 sm:w-40 items-center justify-center gap-2 px-8 py-2 rounded-xl font-base cursor-pointer transition-colors  ${
           isSaved
             ? "border-white text-white hover:bg-white hover:text-black"
             : "border-white text-white hover:bg-white hover:text-black"
