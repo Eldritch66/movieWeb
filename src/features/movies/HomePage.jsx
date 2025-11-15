@@ -2,16 +2,26 @@ import { useLoaderData, useNavigation, useNavigate, Link } from "react-router";
 import { CiSearch } from "react-icons/ci";
 import { FaRegBookmark, FaPlay, FaCircle } from "react-icons/fa";
 import Loading from "../../ui/Loading";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getMovies } from "../../services/apiMovies";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "./moviesSlice";
 import { headerPoster } from "./dataPosterHeader";
 
-const firstImg = headerPoster[0].img;
-const firstId = headerPoster[0].imdbID;
+// const firstImg = headerPoster[0].img;
+// const firstId = headerPoster[0].imdbID;
 
 export default function HomePage() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % headerPoster.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const movies = useLoaderData();
   const navigation = useNavigation();
   const navigate = useNavigate();
@@ -57,11 +67,11 @@ export default function HomePage() {
 
       <div
         id="title-banner"
-        className="relative w-full max-w-[1200px] h-auto ml-0 sm:h-64 md:h-80 mt-8 md:ml-10 xl:ml-40"
+        className="relative w-full max-w-[1200px] h-auto ml-0 sm:h-64 md:h-80 mt-8 md:ml-10 xl:ml-40 scroll-smooth"
       >
         <header className="w-[95%] relative h-full mx-auto rounded-lg overflow-hidden">
           <img
-            src={firstImg}
+            src={headerPoster[currentIndex].img}
             alt="Banner"
             className="w-full h-full object-cover"
           />
@@ -81,16 +91,26 @@ export default function HomePage() {
               2025 ‧ Horror/Adventure ‧ 1h 40m
             </p>
             <span className="bg-green-600 rounded-xl mt-2 w-20 text-sm sm:w-48 p-1.5 font-mono sm:text-xl text-center cursor-pointer">
-              <Link to={`/movies/${firstId}`}>Detail</Link>
+              <Link to={`/movies/${headerPoster[currentIndex].imdbID}`}>
+                Detail
+              </Link>
             </span>
           </div>
         </header>
 
-        <div className="text-white absolute left-1/2 -translate-x-1/2 flex flex-row mt-4 gap-5">
-          <FaCircle className="text-[10px] text-[#2B2B36] font-extralight cursor-pointer" />
-          <FaCircle className="text-[10px] text-green-600 font-extralight cursor-pointer" />
-          <FaCircle className="text-[10px] text-[#2B2B36] font-extralight cursor-pointer" />
+        {/* CAROUSEL BUTTON */}
+        <div className="flex gap-3 absolute left-1/2 -translate-x-1/2 mt-4">
+          {headerPoster.map((_, index) => (
+            <FaCircle
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`text-[10px] cursor-pointer ${
+                index === currentIndex ? "text-green-600" : "text-[#2B2B36]"
+              }`}
+            />
+          ))}
         </div>
+
         {isLoading ? (
           <Loading />
         ) : (
@@ -120,7 +140,7 @@ function ShowMovies({ movies }) {
           alt={movies.Title}
         />
 
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-80 transition-opacity duration-300 w-0 h-0 sm:h-full sm:w-full" />
 
         <span
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2

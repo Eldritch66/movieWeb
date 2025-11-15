@@ -29,10 +29,10 @@ const router = createBrowserRouter(
         },
       ],
     },
-  ],
-  {
-    basename: "/movieWeb",
-  }
+  ]
+  // {
+  //   basename: "/movieWeb",
+  // }
 );
 
 function App() {

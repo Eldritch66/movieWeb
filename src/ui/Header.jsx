@@ -21,7 +21,9 @@ export default function Header() {
   };
   return (
     <nav
-      className={`fixed inset-y-0 left-0 bg-[#1E1F2B] text-white border-r border-gray-700
+      className={`fixed inset-y-0 left-0 bg-[#1E1F2B] text-white ${
+        navOpen && "border-r"
+      } sm:border-r border-gray-700
     transition-transform duration-300 ease-in-out
     ${
       navOpen
