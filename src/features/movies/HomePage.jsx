@@ -3,65 +3,104 @@ import { CiSearch } from "react-icons/ci";
 import { FaRegBookmark, FaPlay, FaCircle } from "react-icons/fa";
 import Loading from "../../ui/Loading";
 import { useEffect, useState } from "react";
-import { getMovies } from "../../services/apiMovies";
+import { getMovies, detailMovie } from "../../services/apiMovies";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "./moviesSlice";
-import { headerPoster } from "./dataPosterHeader";
-
-// const firstImg = headerPoster[0].img;
-// const firstId = headerPoster[0].imdbID;
+import { headerPoster, fetchGenre } from "./dataPosterHeader";
 
 export default function HomePage() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % headerPoster.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
+  //handle genre state
+  const [genreMovies, setGenreMovies] = useState(null);
+  const [loadingGenre, setLoadingGenre] = useState(false);
+  //handle genre state end
 
   const movies = useLoaderData();
   const navigation = useNavigation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [currentIndex, setCurrentIndex] = useState(0);
   const queryInput = useSelector((state) => state.movies.query);
 
   const isLoading = navigation.state === "loading";
-  // const location = useLocation();
-
-  // Ambil query dari URL saat pertama kali render
-  // const [search, setSearch] = useState(() => {
-  //   const params = new URLSearchParams(location.search);
-  //   return params.get("q") || "";
-  // });
 
   useEffect(() => {
+    const interval = setInterval(
+      () => setCurrentIndex((prev) => (prev + 1) % headerPoster.length),
+      3000
+    );
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (!queryInput) return;
     const timeout = setTimeout(() => {
       const params = new URLSearchParams();
       if (queryInput) params.set("q", queryInput);
       navigate(`?${params.toString()}`, { replace: true });
+
+      setGenreMovies(null); // Clear genre movies when searching
     }, 500);
 
     return () => clearTimeout(timeout);
   }, [queryInput, navigate]);
+
+  // HANDLE CLICK GENRE START
+  async function handleGenreClick(genreKey) {
+    setLoadingGenre(true);
+    setGenreMovies(null);
+
+    const ids = fetchGenre[genreKey];
+    const details = await Promise.all(ids.map((id) => detailMovie(id)));
+
+    setGenreMovies(details);
+    setLoadingGenre(false);
+
+    dispatch(setSearch(""));
+    navigate(`?`);
+  }
+  // HANDLE CLICK GENRE END
   return (
     <>
       <section
         id="inputSearch"
-        className="w-full max-w-[1200px] sm:mx-auto mt-8 flex justify-center px-4 sm:px-8"
+        className="w-full max-w-[1200px] sm:mx-auto mt-8 flex px-4 sm:px-8 flex-col sm:flex-row"
       >
-        <div className="relative">
-          <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-100 text-xl" />
-          <input
-            id="searchBar"
-            name="search"
-            type="text"
-            placeholder="Search..."
-            onChange={(e) => dispatch(setSearch(e.target.value))}
-            className="w-48 bg-[#2B2B36] text-white font-mono rounded-full py-1.5 pl-9 pr-3 transition-all duration-300 placeholder:text-stone-400 outline-none focus:outline-none focus:ring focus:ring-green-500 focus:ring-opacity-50 md:w-96 md:focus:w-[600px]"
-          />
+        <ul className="w-auto flex justify-center  flex-row gap-20 ml-5 text-white font-mono text-sm sm:justify-start sm:text-base md:text-xl mt-4">
+          <li
+            className="cursor-pointer"
+            onClick={() => handleGenreClick("anime")}
+          >
+            Anime
+          </li>
+
+          <li
+            className="cursor-pointer"
+            onClick={() => handleGenreClick("action")}
+          >
+            Action
+          </li>
+
+          <li
+            className="cursor-pointer"
+            onClick={() => handleGenreClick("drama")}
+          >
+            Drama
+          </li>
+        </ul>
+
+        <div className="flex-1 flex justify-center mt-4 sm:justify-end">
+          <div className="relative">
+            <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-100 text-xl" />
+            <input
+              className="w-48 bg-[#2B2B36] text-white font-mono rounded-full py-1.5 pl-9 pr-3 transition-all duration-300 placeholder:text-stone-400 outline-none focus:outline-none focus:ring focus:ring-green-500 focus:ring-opacity-50 md:w-96 md:focus:w-[600px]"
+              id="searchBar"
+              name="search"
+              type="text"
+              placeholder="Search..."
+              onChange={(e) => dispatch(setSearch(e.target.value))}
+            />
+          </div>
         </div>
       </section>
 
@@ -111,15 +150,12 @@ export default function HomePage() {
           ))}
         </div>
 
-        {isLoading ? (
+        {loadingGenre || isLoading ? (
           <Loading />
         ) : (
-          <main className="mt-8">
-            <span className="text-white text-xl font-bold ml-1">
-              {queryInput.length === 0 ? "Evangelion" : queryInput}
-            </span>
+          <main className="mt-20">
             <section className="flex flex-row flex-wrap justify-center gap-3 sm:gap-6 mt-5">
-              {movies?.map((m, i) => (
+              {(genreMovies ?? movies)?.map((m, i) => (
                 <ShowMovies movies={m} key={i} />
               ))}
             </section>

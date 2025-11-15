@@ -30,130 +30,43 @@ export const headerPoster = [
   },
 ];
 
-export const genraHeader = {
-  Anime: [
-    {
-      id: "fullmetal_brotherhood",
-      Title: "Fullmetal Alchemist: Brotherhood",
-      img: null,
-      imdbID: "tt1355642",
-    },
-    {
-      id: "death_note",
-      Title: "Death Note",
-      img: null,
-      imdbID: "tt0877057",
-    },
-    {
-      id: "steins_gate",
-      Title: "Steins;Gate",
-      img: null,
-      imdbID: "tt1910272",
-    },
-    {
-      id: "your_name",
-      Title: "Your Name.",
-      img: null,
-      imdbID: "tt5311514",
-    },
-    {
-      id: "spirited_away",
-      Title: "Spirited Away",
-      img: null,
-      imdbID: "tt0245429",
-    },
-    {
-      id: "grave_of_fireflies",
-      Title: "Grave of the Fireflies",
-      img: null,
-      imdbID: "tt0095327",
-    },
-    {
-      id: "princess_mononoke",
-      Title: "Princess Mononoke",
-      img: null,
-      imdbID: "tt0119698",
-    },
-    {
-      id: "howls_moving_castle",
-      Title: "Howl's Moving Castle",
-      img: null,
-      imdbID: "tt0347149",
-    },
-    {
-      id: "akira",
-      Title: "Akira",
-      img: null,
-      imdbID: "tt0094625",
-    },
-    {
-      id: "gintama_final",
-      Title: "Gintama: The Very Final",
-      img: null,
-      imdbID: "tt18249612",
-    },
+export const fetchGenre = {
+  anime: [
+    "tt2560140",
+    "tt9335498",
+    "tt0409591",
+    "tt0988824",
+    "tt13706018",
+    "tt12343534",
+    "tt2560140",
+    "tt9335498",
+    "tt0434706",
+    "tt5311514",
   ],
 
-  Drama: [
-    {
-      id: "oppenheimer",
-      Title: "Oppenheimer",
-      img: null,
-      imdbID: "tt15398776",
-    },
-    {
-      id: "anne_with_an_e",
-      Title: "Anne with an E",
-      img: null,
-      imdbID: "tt5421602",
-    },
-    {
-      id: "the_imitation_game",
-      Title: "The Imitation Game",
-      img: null,
-      imdbID: "tt2084970",
-    },
-    {
-      id: "forrest_gump",
-      Title: "Forrest Gump",
-      img: null,
-      imdbID: "tt0109830",
-    },
-    {
-      id: "the_prestige",
-      Title: "The Prestige",
-      img: null,
-      imdbID: "tt0482571",
-    },
-    {
-      id: "a_beautiful_mind",
-      Title: "A Beautiful Mind",
-      img: null,
-      imdbID: "tt0268978",
-    },
-    {
-      id: "the_social_network",
-      Title: "The Social Network",
-      img: null,
-      imdbID: "tt1285016",
-    },
-    {
-      id: "la_la_land",
-      Title: "La La Land",
-      img: null,
-      imdbID: "tt3783958",
-    },
-    {
-      id: "the_crown",
-      Title: "The Crown",
-      img: null,
-      imdbID: "tt4786824",
-    },
-    {
-      id: "the_godfather",
-      Title: "The Godfather",
-      img: null,
-      imdbID: "tt0068646",
-    },
+  action: [
+    "tt2911666",
+    "tt4154796",
+    "tt4633694",
+    "tt1345836",
+    "tt3501632",
+    "tt2316204",
+    "tt1630029",
+    "tt1386697",
+    "tt1298650",
+    "tt0120737",
+  ],
+
+  drama: [
+    "tt0108052",
+    "tt6723592",
+    "tt7286456",
+    "tt0816692",
+    "tt2582802",
+    "tt4633694",
+    "tt1454029",
+    "tt1798709",
+    "tt1745960",
+    "tt1375666",
   ],
 };
