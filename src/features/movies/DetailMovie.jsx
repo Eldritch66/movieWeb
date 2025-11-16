@@ -4,7 +4,9 @@ import { useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import { IoReturnUpBack } from "react-icons/io5";
 import ToggleWatchlistButton from "../../ui/ButtonWatchList";
-
+import Rating from "@mui/material/Rating";
+import StarIcon from "@mui/icons-material/Star";
+import RatingComment from "../../ui/RatingComponent";
 //{bookInfo.title.length > 20
 // ? bookInfo.title.slice(0, 20) + "..."
 // : bookInfo.title}
@@ -110,6 +112,7 @@ export default function DetailPage() {
           <ToggleWatchlistButton movie={movie} />
         </header>
       </article>
+      <RatingComment />
     </main>
   );
 }
