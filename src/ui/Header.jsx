@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 import { RiMovie2Fill } from "react-icons/ri";
 import { RxBookmark } from "react-icons/rx";
-import { CgProfile } from "react-icons/cg";
+import { MdOutlineRateReview } from "react-icons/md";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { clearSearch } from "../features/movies/moviesSlice";
@@ -58,10 +58,12 @@ export default function Header() {
           </Link>
         </li>
         <li className="pl-6">
-          <CgProfile
-            className={`inline-block ${navOpen ? "text-2xl" : "text-4xl"}`}
-          />
-          {navOpen ? <span className="pl-2 inline-block">Profile</span> : ""}
+          <Link to="/userReview/">
+            <MdOutlineRateReview
+              className={`inline-block ${navOpen ? "text-2xl" : "text-4xl"}`}
+            />
+            {navOpen ? <span className="pl-2 inline-block">Review</span> : ""}
+          </Link>
         </li>
       </ul>
 

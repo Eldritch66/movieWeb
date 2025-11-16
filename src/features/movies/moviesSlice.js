@@ -70,10 +70,12 @@ const movieSlice = createSlice({
 
       saveData(state.ratingComments);
     },
-
     editMovieComment(state, action) {
       const { imdbID, index, newComment } = action.payload;
-      state.ratingComments[imdbID].comments[index] = newComment;
+      if (typeof state.ratingComments[imdbID].comments[index] === "object") {
+        state.ratingComments[imdbID].comments[index].text = newComment;
+      }
+
       saveData(state.ratingComments);
     },
 

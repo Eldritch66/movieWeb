@@ -8,9 +8,16 @@ import {
 } from "../features/movies/moviesSlice";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useLoaderData } from "react-router";
 import { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
+import {
+  MdDeleteForever,
+  MdDone,
+  MdOutlineDoneOutline,
+  MdCancel,
+} from "react-icons/md";
 
 function RatingComment() {
   const movie = useLoaderData();
@@ -65,7 +72,12 @@ function RatingComment() {
           onChange={handleRatingChange}
           precision={0.5}
           icon={<StarIcon fontSize="inherit" />}
-          emptyIcon={<StarIcon fontSize="inherit" style={{ opacity: 0.4 }} />}
+          emptyIcon={
+            <StarBorderIcon
+              fontSize="inherit"
+              className="opacity-100 text-yellow-300"
+            />
+          }
           disabled={!isEditingRating && currentRating > 0} // disable if already rated & not editing
         />
 
@@ -75,15 +87,15 @@ function RatingComment() {
               setIsEditingRating(true);
               setTempRating(currentRating);
             }}
-            className="text-blue-400 text-lg"
+            className="text-blue-400 text-xl"
           >
             <FaRegEdit />
           </button>
         )}
 
         {isEditingRating && (
-          <button onClick={handleSaveRating} className="text-green-500 text-lg">
-            Save
+          <button onClick={handleSaveRating} className="text-green-500 text-xl">
+            <MdOutlineDoneOutline />
           </button>
         )}
       </div>
@@ -103,8 +115,8 @@ function RatingComment() {
           {comments.length > 0 ? "Your Review:" : ""}
         </h3>
         <ul className="space-y-2">
-          {comments.map((c, i) => (
-            <CommentItem key={i} comment={c} index={i} imdbID={imdbID} />
+          {comments.map((comment, i) => (
+            <CommentItem key={i} comment={comment} index={i} imdbID={imdbID} />
           ))}
         </ul>
       </div>
@@ -115,7 +127,7 @@ function RatingComment() {
 function CommentItem({ comment, index, imdbID }) {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const [text, setText] = useState(comment);
+  const [text, setText] = useState(comment.text);
 
   return (
     <li className="px-3 py-2 bg-[#2a2a36] rounded-md text-sm text-gray-200 flex justify-between items-center">
@@ -137,12 +149,15 @@ function CommentItem({ comment, index, imdbID }) {
               );
               setIsEditing(false);
             }}
-            className="text-green-400 mr-2"
+            className="text-green-400 mr-2 text-xl"
           >
-            Save
+            <MdDone />
           </button>
-          <button onClick={() => setIsEditing(false)} className="text-gray-400">
-            Cancel
+          <button
+            onClick={() => setIsEditing(false)}
+            className="text-gray-400 text-xl"
+          >
+            <MdCancel />
           </button>
         </>
       ) : (
@@ -152,18 +167,15 @@ function CommentItem({ comment, index, imdbID }) {
             <span>{comment.text}</span>
           </div>{" "}
           <div className="flex gap-3">
-            <button
+            <FaRegEdit
               onClick={() => setIsEditing(true)}
-              className="text-green-600"
-            >
-              Edit
-            </button>
-            <button
+              className="text-green-600 text-xl"
+            />
+
+            <MdDeleteForever
               onClick={() => dispatch(deleteMovieComment({ imdbID, index }))}
-              className="text-red-400"
-            >
-              Delete
-            </button>
+              className="text-red-600 text-xl"
+            />
           </div>
         </>
       )}

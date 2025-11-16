@@ -6,6 +6,7 @@ import DetailPage, {
   loader as detailLoader,
 } from "./features/movies/DetailMovie";
 import SaveMovies from "./features/saved/SaveMovies";
+import UserReview from "./features/user/UserReview";
 
 const router = createBrowserRouter(
   [
@@ -26,6 +27,10 @@ const router = createBrowserRouter(
         {
           path: "/saveMovies/",
           element: <SaveMovies />,
+        },
+        {
+          path: "/userReview/",
+          element: <UserReview />,
         },
       ],
     },
