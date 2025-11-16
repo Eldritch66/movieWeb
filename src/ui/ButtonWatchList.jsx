@@ -20,12 +20,12 @@ export default function ToggleWatchlistButton({ movie }) {
       >
         {isSaved ? (
           <>
-            <FaCheck className="text-xl" />
+            <FaCheck className="sm:text-xl shrink-0" />
             <span>Added</span>
           </>
         ) : (
           <>
-            <FiPlus className="text-xl" />
+            <FiPlus className="sm:text-xl shrink-0" />
             <span>Watchlist</span>
           </>
         )}

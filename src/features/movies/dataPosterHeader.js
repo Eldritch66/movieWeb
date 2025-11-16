@@ -7,24 +7,28 @@ export const headerPoster = [
   {
     id: "chainsawman",
     Title: "Chainsaw Man – The Movie: \n Reze Arc",
+    dateGenre: "2025 ‧ Horror/Adventure ‧ 1h 40m",
     img: chainsawman,
     imdbID: "tt30472557",
   },
   {
     id: "oppenheimer",
     Title: "Oppenheimer",
+    dateGenre: "2023 ‧ Biography/Drama ‧ 3h 0m",
     img: oppenheimer,
     imdbID: "tt15398776",
   },
   {
     id: "wednesday",
     Title: "Wednesday",
+    dateGenre: "2022 ‧ Comedy/Fantasy ‧ 1 Season",
     img: wednesday,
     imdbID: "tt13443470",
   },
   {
     id: "deadpool",
     Title: "Deadpool and Wolverine",
+    dateGenre: "2024 ‧ Action/Comedy ‧ 2h 15m",
     img: deadpool,
     imdbID: "tt6263850",
   },

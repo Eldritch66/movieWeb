@@ -64,9 +64,9 @@ export default function HomePage() {
     <>
       <section
         id="inputSearch"
-        className="w-full max-w-[1200px] sm:mx-auto mt-8 flex px-4 sm:px-8 flex-col sm:flex-row"
+        className="w-full max-w-[1200px] sm:mx-auto mt-8 flex px-0 sm:px-8 flex-col sm:flex-row"
       >
-        <ul className="w-auto flex justify-center  flex-row gap-20 ml-5 text-white font-mono text-sm sm:justify-start sm:text-base md:text-xl mt-4">
+        <ul className="w-full flex justify-center  flex-row gap-20 text-white font-mono text-sm sm:justify-start sm:text-base md:text-xl mt-4">
           <li
             className="cursor-pointer"
             onClick={() => handleGenreClick("anime")}
@@ -106,13 +106,13 @@ export default function HomePage() {
 
       <div
         id="title-banner"
-        className="relative w-full max-w-[1200px] h-auto ml-0 sm:h-64 md:h-80 mt-8 md:ml-10 xl:ml-40 scroll-smooth"
+        className="relative w-full max-w-[1200px] h-auto sm:h-64 md:h-80 mt-8 md:ml-10 xl:ml-40 scroll-smooth"
       >
-        <header className="w-[95%] relative h-full mx-auto rounded-lg overflow-hidden">
+        <header className="w-full relative h-full sm:mx-auto rounded-lg overflow-hidden">
           <img
             src={headerPoster[currentIndex].img}
             alt="Banner"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
           <div className="w-full absolute inset-0 bg-black/30  opacity-50" />
 
@@ -124,10 +124,10 @@ export default function HomePage() {
 
           <div className="absolute left-5 bottom-5 sm:left-20 sm:bottom-10 flex flex-col text-white z-40">
             <h2 className="text-xs sm:text-xl font-bold mb-1">
-              Chainsaw Man – The Movie: <br /> Reze Arc
+              {headerPoster[currentIndex].Title}
             </h2>
             <p className="text-xs sm:text-sm text-gray-400">
-              2025 ‧ Horror/Adventure ‧ 1h 40m
+              {headerPoster[currentIndex].dateGenre}
             </p>
             <span className="bg-green-600 rounded-xl mt-2 w-20 text-sm sm:w-48 p-1.5 font-mono sm:text-xl text-center cursor-pointer">
               <Link to={`/movies/${headerPoster[currentIndex].imdbID}`}>
@@ -153,7 +153,7 @@ export default function HomePage() {
         {loadingGenre || isLoading ? (
           <Loading />
         ) : (
-          <main className="mt-20">
+          <main className="mt-12">
             <section className="flex flex-row flex-wrap justify-center gap-3 sm:gap-6 mt-5">
               {(genreMovies ?? movies)?.map((m, i) => (
                 <ShowMovies movies={m} key={i} />

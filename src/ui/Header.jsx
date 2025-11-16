@@ -28,7 +28,7 @@ export default function Header() {
     ${
       navOpen
         ? "translate-x-0 w-44"
-        : "-translate-x-[90%] md:-translate-x-[0%] w-25"
+        : "-translate-x-full md:-translate-x-[0%] w-24"
     } `}
     >
       <div className={`${navOpen ? "w-32" : "W-20"} mx-auto`}>
